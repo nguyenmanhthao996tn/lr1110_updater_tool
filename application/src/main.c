@@ -34,7 +34,7 @@
  * --- DEPENDENCIES ------------------------------------------------------------
  */
 
-#include "lr1110_modem_1.0.7.h"
+#include "lr1110_transceiver_0303.h"
 
 #include "configuration.h"
 #include "system.h"
@@ -42,8 +42,8 @@
 #include "string.h"
 #include "lr1110_firmware_update.h"
 #include "lvgl.h"
-#include "lv_port_disp.h"
-#include "gui.h"
+// #include "lv_port_disp.h"
+// #include "gui.h"
 
 /*
  * -----------------------------------------------------------------------------
@@ -66,7 +66,7 @@
  */
 
 radio_t radio = {
-    SPI1,
+    SPI3,
     { LR1110_NSS_PORT, LR1110_NSS_PIN },
     { LR1110_RESET_PORT, LR1110_RESET_PIN },
     { LR1110_IRQ_PORT, LR1110_IRQ_PIN },
@@ -77,6 +77,32 @@ radio_t radio = {
  * -----------------------------------------------------------------------------
  * --- PRIVATE FUNCTIONS DECLARATION -------------------------------------------
  */
+
+FILE __stdin, __stdout, __stderr;
+int fputc(int c, FILE * stream)
+{
+	system_uart_send_char(c); //Transmit Character
+	return c; //return the character written to denote a successful write
+}
+
+int fgetc(FILE * stream)
+{
+	char c = system_uart_receive_char(); //Receive Character
+	system_uart_send_char(c); //To echo Received characters back to serial Terminal
+	return c;
+}
+
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif
+
+PUTCHAR_PROTOTYPE   /**RETARGET PRINTF TO UART2***/
+{
+  system_uart_send_char(ch); //Transmit Character
+	return ch; //return the character written to denote a successful write
+}
 
 /*
  * -----------------------------------------------------------------------------
@@ -92,12 +118,12 @@ int main( void )
 
     system_time_wait_ms( 2000 );
 
-    lv_init( );
-    lv_port_disp_init( );
+    // lv_init( );
+    // lv_port_disp_init( );
 
     printf( "LR1110 updater tool v1.1.0\n" );
 
-    gui_init( LR1110_FIRMWARE_VERSION );
+    // gui_init( LR1110_FIRMWARE_VERSION );
 
     if( LR1110_FIRMWARE_UPDATE_TO == LR1110_FIRMWARE_UPDATE_TO_TRX )
     {
@@ -120,13 +146,13 @@ int main( void )
             switch( status )
             {
             case LR1110_FW_UPDATE_OK:
-                gui_update( "UPDATE DONE!\nPlease flash another application\n(like EVK Demo App)" );
+                // gui_update( "UPDATE DONE!\nPlease flash another application\n(like EVK Demo App)" );
                 break;
             case LR1110_FW_UPDATE_WRONG_CHIP_TYPE:
-                gui_update( "WRONG CHIP TYPE" );
+                // gui_update( "WRONG CHIP TYPE" );
                 break;
             case LR1110_FW_UPDATE_ERROR:
-                gui_update( "ERROR\nWrong firmware version\nPlease retry" );
+                // gui_update( "ERROR\nWrong firmware version\nPlease retry" );
                 break;
             }
 

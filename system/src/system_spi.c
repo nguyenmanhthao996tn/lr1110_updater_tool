@@ -27,21 +27,21 @@ void system_spi_init( void )
     LL_GPIO_InitTypeDef GPIO_InitStruct = { 0 };
 
     /* Peripheral clock enable */
-    LL_APB2_GRP1_EnableClock( LL_APB2_GRP1_PERIPH_SPI1 );
-    LL_AHB2_GRP1_EnableClock( LL_AHB2_GRP1_PERIPH_GPIOA );
+    LL_APB1_GRP1_EnableClock( LL_APB1_GRP1_PERIPH_SPI3 );
+    LL_AHB2_GRP1_EnableClock( LL_AHB2_GRP1_PERIPH_GPIOC );
 
     /** SPI1 GPIO Configuration
-    PA5   ------> SPI1_SCK
-    PA6   ------> SPI1_MISO
-    PA7   ------> SPI1_MOSI
+    PC10   ------> SPI1_SCK
+    PC11   ------> SPI1_MISO
+    PC12   ------> SPI1_MOSI
     */
-    GPIO_InitStruct.Pin        = LL_GPIO_PIN_5 | LL_GPIO_PIN_6 | LL_GPIO_PIN_7;
+    GPIO_InitStruct.Pin        = LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12;
     GPIO_InitStruct.Mode       = LL_GPIO_MODE_ALTERNATE;
     GPIO_InitStruct.Speed      = LL_GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
     GPIO_InitStruct.Pull       = LL_GPIO_PULL_NO;
-    GPIO_InitStruct.Alternate  = LL_GPIO_AF_5;
-    LL_GPIO_Init( GPIOA, &GPIO_InitStruct );
+    GPIO_InitStruct.Alternate  = LL_GPIO_AF_6;
+    LL_GPIO_Init( GPIOC, &GPIO_InitStruct );
 
     SPI_InitStruct.BaudRate          = LL_SPI_BAUDRATEPRESCALER_DIV4;
     SPI_InitStruct.TransferDirection = LL_SPI_FULL_DUPLEX;
@@ -53,17 +53,17 @@ void system_spi_init( void )
     SPI_InitStruct.BitOrder          = LL_SPI_MSB_FIRST;
     SPI_InitStruct.CRCCalculation    = LL_SPI_CRCCALCULATION_DISABLE;
     SPI_InitStruct.CRCPoly           = 7;
-    LL_SPI_Init( SPI1, &SPI_InitStruct );
+    LL_SPI_Init( SPI3, &SPI_InitStruct );
 
-    LL_SPI_SetStandard( SPI1, LL_SPI_PROTOCOL_MOTOROLA );
-    LL_SPI_DisableNSSPulseMgt( SPI1 );
+    LL_SPI_SetStandard( SPI3, LL_SPI_PROTOCOL_MOTOROLA );
+    LL_SPI_DisableNSSPulseMgt( SPI3 );
 
-    LL_SPI_Enable( SPI1 );
-    while( LL_SPI_IsEnabled( SPI1 ) == 0 )
+    LL_SPI_Enable( SPI3 );
+    while( LL_SPI_IsEnabled( SPI3 ) == 0 )
     {
     };
 
-    LL_SPI_SetRxFIFOThreshold( SPI1, LL_SPI_RX_FIFO_TH_QUARTER );
+    LL_SPI_SetRxFIFOThreshold( SPI3, LL_SPI_RX_FIFO_TH_QUARTER );
 }
 
 void system_spi_write( SPI_TypeDef* spi, const uint8_t* buffer, uint16_t length )

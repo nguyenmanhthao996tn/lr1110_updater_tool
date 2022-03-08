@@ -158,13 +158,32 @@ lr1110_fw_update_status_t lr1110_update_firmware( void* radio, lr1110_fw_update_
                 status = LR1110_FW_UPDATE_OK;
                 printf( "Expected firmware running!\n" );
                 printf( "Please flash another application (like EVK Demo App).\n" );
+							
                 system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
+								system_time_wait_ms( 250 );
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_LOW );
+								system_time_wait_ms( 250 );
+							
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
+								system_time_wait_ms( 250 );
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_LOW );
+								system_time_wait_ms( 250 );
+							
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
+								system_time_wait_ms( 250 );
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_LOW );
+								system_time_wait_ms( 250 );
+							
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
+								system_time_wait_ms( 250 );
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_LOW );
+								system_time_wait_ms( 250 );
             }
             else
             {
                 status = LR1110_FW_UPDATE_ERROR;
                 printf( "Error! Wrong firmware version - please retry.\n" );
-                system_gpio_set_pin_state( lr1110_led_tx, SYSTEM_GPIO_PIN_STATE_HIGH );
+                system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
             }
             break;
         }
@@ -187,13 +206,33 @@ lr1110_fw_update_status_t lr1110_update_firmware( void* radio, lr1110_fw_update_
                 status = LR1110_FW_UPDATE_OK;
                 printf( "Expected firmware running!\n" );
                 printf( "Please flash another application (like EVK Demo App).\n" );
-                system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
+                
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
+								system_time_wait_ms( 250 );
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_LOW );
+								system_time_wait_ms( 250 );
+							
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
+								system_time_wait_ms( 250 );
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_LOW );
+								system_time_wait_ms( 250 );
+							
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
+								system_time_wait_ms( 250 );
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_LOW );
+								system_time_wait_ms( 250 );
+							
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
+								system_time_wait_ms( 250 );
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_LOW );
+								system_time_wait_ms( 250 );
             }
             else
             {
                 status = LR1110_FW_UPDATE_ERROR;
                 printf( "Error! Wrong firmware version - please retry.\n" );
-                system_gpio_set_pin_state( lr1110_led_tx, SYSTEM_GPIO_PIN_STATE_HIGH );
+                
+								system_gpio_set_pin_state( lr1110_led_rx, SYSTEM_GPIO_PIN_STATE_HIGH );
             }
             break;
         }
