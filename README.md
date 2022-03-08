@@ -9,6 +9,8 @@ The project is developed for the following configuration:
 
 -   [RFThings](https://rfthings.com.vn) Libra Board ver1.2
 
+<b>This project is not compiled with GUI & LCD driver to reduce the flash size. Therefore, it could be easier to use with 265KB Flash MCU (STM32RCT6).</b>
+
 ![Libra Board ver1.2](./docs/libra-v1.2-board.jpg)
 
 ## Compilation
@@ -59,5 +61,7 @@ The user can get information about the update status through the following inter
 ![](./docs/libra-v1.2-board-J8.jpg)
 
 ![](./docs/libra-v1.2-board-J8-SCH.jpg)
+
+![](./docs/SerialOutputSuccess.JPG)
 
 ### Goodluck!
